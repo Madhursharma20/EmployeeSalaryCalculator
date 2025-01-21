@@ -1,20 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Salary Calculator</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to the Employee Salary Calculator</h1>
-  <p>This application calculates employee salaries based on their attendance and monthly salary.</p>
-  <h2>Features</h2>
-  <ul>
-    <li>Enter employee details</li>
-    <li>Calculate monthly salaries</li>
-    <li>Save records</li>
-  </ul>
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>Employee Salary Calculator</h1>
+        <form id="salaryForm">
+            <label for="employeeName">Employee Name</label>
+            <input type="text" id="employeeName" placeholder="Enter Employee Name" required>
+
+            <label for="mobileNumber">Mobile Number</label>
+            <input type="text" id="mobileNumber" placeholder="Enter Mobile Number" required>
+
+            <label for="salary">Monthly Salary</label>
+            <input type="number" id="salary" placeholder="Enter Monthly Salary" required>
+
+            <label for="daysPresent">Days Present</label>
+            <input type="number" id="daysPresent" placeholder="Enter Total Days Present" required>
+
+            <button type="button" onclick="calculateSalary()">Calculate Salary</button>
+        </form>
+        <div class="result" id="resultBox">
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateSalary() {
+            // Get input values
+            const employeeName = document.getElementById('employeeName').value;
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const salary = parseFloat(document.getElementById('salary').value);
+            const daysPresent = parseInt(document.getElementById('daysPresent').value);
+
+            // Validation
+            if (isNaN(salary) || isNaN(daysPresent) || daysPresent < 0 || daysPresent > 30) {
+                alert('Please enter valid numbers for salary and days present!');
+                return;
+            }
+
+            // Calculate pro-rated salary
+            const dailySalary = salary / 30;
+            const totalSalary = dailySalary * daysPresent;
+
+            // Show result
+            const resultBox = document.getElementById('resultBox');
+            const resultText = document.getElementById('resultText');
+            resultText.innerHTML = `
+                <strong>Employee Name:</strong> ${employeeName} <br>
+                <strong>Mobile Number:</strong> ${mobileNumber} <br>
+                <strong>Total Salary for ${daysPresent} days:</strong> ₹${totalSalary.toFixed(2)}
+            `;
+            resultBox.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
