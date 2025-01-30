@@ -1,18 +1,18 @@
 {
   "name": "Employee Salary Calculator",
   "short_name": "SalaryCalc",
-  "start_url": "https://yourusername.github.io/repository-name/index.html",
+  "start_url": "https://madhursharma20.github.io/EmployeeSalaryCalculator/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#28a745",
   "icons": [
     {
-      "src": "https://yourusername.github.io/repository-name/icon-192x192.png",
+      "src": "https://madhursharma20.github.io/EmployeeSalaryCalculator/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://yourusername.github.io/repository-name/icon-512x512.png",
+      "src": "https://madhursharma20.github.io/EmployeeSalaryCalculator/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
