@@ -16,9 +16,10 @@
             height: 100vh;
         }
         .container {
+            width: 90%;
             max-width: 600px;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -30,11 +31,11 @@
         }
         h1 {
             color: #333;
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 10px;
         }
         p {
-            font-size: 18px;
+            font-size: 16px;
             color: #555;
             line-height: 1.6;
             margin-bottom: 15px;
@@ -47,38 +48,60 @@
         }
         .support h2 {
             color: #28a745;
+            font-size: 18px;
         }
         .support img {
-            width: 150px;
+            width: 120px;
             display: block;
             margin: 10px auto;
         }
-        .linkedin-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #0077b5;
-            color: white;
+        .linkedin-btn, .back-btn {
+            display: block;
+            margin: 15px auto;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 16px;
             transition: 0.3s;
+            width: 80%;
+        }
+        .linkedin-btn {
+            background: #0077b5;
+            color: white;
         }
         .linkedin-btn:hover {
             background: #005582;
         }
         .back-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
             background: #007bff;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
         }
         .back-btn:hover {
             background: #0056b3;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .support {
+                padding: 10px;
+            }
+            .support h2 {
+                font-size: 16px;
+            }
+            .support img {
+                width: 100px;
+            }
+            .linkedin-btn, .back-btn {
+                font-size: 13px;
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -96,7 +119,6 @@
         </div>
 
         <a href="https://in.linkedin.com/in/madhur-sharma-a31273200" target="_blank" class="linkedin-btn">🔗 Connect on LinkedIn</a>
-        <br>
         <a href="index.html" class="back-btn">← Back to Calculator</a>
     </div>
 </body>
