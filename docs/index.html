@@ -11,16 +11,16 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        .container {
+        .container, .login-box, .about-box {
             max-width: 600px;
             margin: 50px auto;
             padding: 20px;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         h1 {
-            text-align: center;
             color: #333;
         }
         label {
@@ -28,7 +28,7 @@
             margin: 15px 0 5px;
             font-weight: bold;
         }
-        input {
+        input, select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -48,15 +48,37 @@
         button:hover {
             background-color: #218838;
         }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            text-align: center;
+        .result-fullscreen {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding-top: 20%;
+            font-size: 24px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .popup img {
+            width: 150px;
+        }
+        .popup button {
+            margin-top: 10px;
+            background-color: #dc3545;
         }
     </style>
 </head>
@@ -64,53 +86,78 @@
     <div class="container">
         <h1>Employee Salary Calculator</h1>
         <form id="salaryForm">
-            <label for="employeeName">Employee Name</label>
-            <input type="text" id="employeeName" placeholder="Enter Employee Name" required>
-
-            <label for="mobileNumber">Mobile Number</label>
-            <input type="text" id="mobileNumber" placeholder="Enter Mobile Number" required>
-
             <label for="salary">Monthly Salary</label>
             <input type="number" id="salary" placeholder="Enter Monthly Salary" required>
+
+            <label for="daysInMonth">Days in Month</label>
+            <select id="daysInMonth">
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31" selected>31</option>
+            </select>
 
             <label for="daysPresent">Days Present</label>
             <input type="number" id="daysPresent" placeholder="Enter Total Days Present" required>
 
             <button type="button" onclick="calculateSalary()">Calculate Salary</button>
         </form>
-        <div class="result" id="resultBox">
-            <p id="resultText"></p>
-        </div>
+    </div>
+
+    <div class="result-fullscreen" id="fullScreenResult" onclick="closeResult()">
+        <p id="resultText"></p>
+        <button onclick="closeResult()">Close</button>
+    </div>
+
+    <div class="popup" id="popup">
+        <p>Thanks for using this tool! If you like it, support me:</p>
+        <img src="qr_code.png" alt="QR Code">
+        <img src="payment_logos.png" alt="Payment Methods">
+        <button onclick="closePopup()">Close</button>
     </div>
 
     <script>
+        let usageCount = 0;
+
         function calculateSalary() {
-            // Get input values
-            const employeeName = document.getElementById('employeeName').value;
-            const mobileNumber = document.getElementById('mobileNumber').value;
             const salary = parseFloat(document.getElementById('salary').value);
+            const daysInMonth = parseInt(document.getElementById('daysInMonth').value);
             const daysPresent = parseInt(document.getElementById('daysPresent').value);
 
-            // Validation
-            if (isNaN(salary) || isNaN(daysPresent) || daysPresent < 0 || daysPresent > 30) {
+            if (isNaN(salary) || isNaN(daysPresent) || daysPresent < 0 || daysPresent > daysInMonth) {
                 alert('Please enter valid numbers for salary and days present!');
                 return;
             }
 
-            // Calculate pro-rated salary
-            const dailySalary = salary / 30;
-            const totalSalary = dailySalary * daysPresent;
+            const totalSalary = (salary / daysInMonth) * daysPresent;
+            document.getElementById('resultText').innerHTML = `Total Salary: ₹${totalSalary.toFixed(2)}`;
+            document.getElementById('fullScreenResult').style.display = 'block';
 
-            // Show result
-            const resultBox = document.getElementById('resultBox');
-            const resultText = document.getElementById('resultText');
-            resultText.innerHTML = `
-                <strong>Employee Name:</strong> ${employeeName} <br>
-                <strong>Mobile Number:</strong> ${mobileNumber} <br>
-                <strong>Total Salary for ${daysPresent} days:</strong> ₹${totalSalary.toFixed(2)}
-            `;
-            resultBox.style.display = 'block';
+            usageCount++;
+            if (usageCount >= 3) {
+                setTimeout(() => {
+                    document.getElementById('popup').style.display = 'block';
+                }, 2000);
+                usageCount = 0;
+            }
+        }
+
+        function closeResult() {
+            document.getElementById('fullScreenResult').style.display = 'none';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
         }
     </script>
+
+    <div class="about-box">
+        <h2>About Developer</h2>
+        <a href="about.html">Click here to know more</a>
+    </div>
+    <div class="login-box">
+        <h2>Organization Login</h2>
+        <a href="login.html">Click here to login</a>
+    </div>
 </body>
 </html>
