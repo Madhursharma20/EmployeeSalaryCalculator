@@ -10,47 +10,94 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
             max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h1 {
             color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
         p {
             font-size: 18px;
             color: #555;
             line-height: 1.6;
+            margin-bottom: 15px;
         }
         .support {
             margin-top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .support h2 {
+            color: #28a745;
         }
         .support img {
             width: 150px;
             display: block;
             margin: 10px auto;
         }
+        .linkedin-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #0077b5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .linkedin-btn:hover {
+            background: #005582;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>About the Developer</h1>
-        <p>Hello! My name is <strong>Madhur Sharma</strong>. I created this Employee Salary Calculator because I noticed that many small businesses manually calculate employee salaries every month.</p>
-        <p>Large companies have automated payroll systems, but small enterprises still rely on calculators and spreadsheets. This tool makes it easier by automating salary calculations based on attendance.</p>
-        <a href="https://in.linkedin.com/in/madhur-sharma-a31273200" class="button">My LinkedIn Profile</a>
+        <p>Hi, I'm <strong>Madhur Sharma</strong>. I developed this Employee Salary Calculator to help small businesses automate salary calculations and reduce manual effort.</p>
+        <p>Large companies use payroll software, but small businesses often rely on calculators and spreadsheets. This tool simplifies that process by automating salary calculations based on attendance.</p>
+
         <div class="support">
             <h2>Support My Work</h2>
-            <p>If you like my project, consider supporting me!</p>
+            <p>If you like this tool, consider supporting me:</p>
             <img src="qr_code.png" alt="QR Code for Payment">
             <img src="payment_logos.png" alt="Payment Methods">
         </div>
-        <p><a href="index.html">← Back to Calculator</a></p>
+
+        <a href="https://in.linkedin.com/in/madhur-sharma-a31273200" target="_blank" class="linkedin-btn">🔗 Connect on LinkedIn</a>
+        <br>
+        <a href="index.html" class="back-btn">← Back to Calculator</a>
     </div>
 </body>
 </html>
