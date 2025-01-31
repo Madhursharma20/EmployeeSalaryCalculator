@@ -7,11 +7,11 @@
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
-<script>
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("service-worker.js");
-    }
-</script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js");
+        }
+    </script>
 
     <style>
         body {
@@ -89,6 +89,19 @@
             margin-top: 10px;
             background-color: #dc3545;
         }
+        .install-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -125,6 +138,8 @@
         <button onclick="closePopup()">Close</button>
     </div>
 
+    <button id="installButton" class="install-btn">Install App</button>
+
     <script>
         let usageCount = 0;
 
@@ -157,13 +172,6 @@
 
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
-        }
-
-        // Step 4: Register the Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-                .then(() => console.log("Service Worker Registered"))
-                .catch((err) => console.error("Service Worker Registration Failed", err));
         }
     </script>
 
