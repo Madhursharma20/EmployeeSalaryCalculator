@@ -1,6 +1,6 @@
 {
   "name": "Employee Salary Calculator",
-  "short_name": "SalaryCalc",
+  "short_name": "Salary Calculator",
   "start_url": "https://madhursharma20.github.io/EmployeeSalaryCalculator/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
