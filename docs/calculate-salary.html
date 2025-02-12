@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Salaries</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Salaries</h1>
+        <table id="salaryTable">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Position</th>
+                    <th>Monthly Salary</th>
+                    <th>Days Present</th>
+                    <th>Calculated Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Employee rows will be added here dynamically -->
+            </tbody>
+        </table>
+        <button onclick="generatePDF()">Generate PDF</button>
+    </div>
+    <script type="module">
+        import { getEmployees } from "./firebase-data.js";
+        import { generatePDF } from "./js/pdf-generator.js";
+
+        function loadEmployees() {
+            const orgId = localStorage.getItem("orgId");
+
+            if (!orgId) {
+                alert("You need to log in first.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            getEmployees(orgId)
+                .then(employees => {
+                    const tbody = document.getElementById("salaryTable").querySelector("tbody");
+                    tbody.innerHTML = ""; // Clear any existing rows
+
+                    employees.forEach(emp => {
+                        const salary = (emp.salary / emp.daysInMonth) * emp.daysPresent || emp.salary;
+                        const row = `
+                            <tr>
+                                <td>${emp.empName}</td>
+                                <td>${emp.position}</td>
+                                <td>${emp.salary}</td>
+                                <td>${emp.daysPresent || "N/A"}</td>
+                                <td>${salary.toFixed(2)}</td>
+                            </tr>`;
+                        tbody.innerHTML += row;
+                    });
+                })
+                .catch(err => console.error("Error fetching employees:", err));
+        }
+
+        loadEmployees();
+    </script>
+</body>
+</html>
