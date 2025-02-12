@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Employee</h1>
+        <form id="addEmployeeForm">
+            <label for="name">Employee Name:</label>
+            <input type="text" id="name" placeholder="Enter employee name" required>
+
+            <label for="position">Position:</label>
+            <input type="text" id="position" placeholder="Enter position" required>
+
+            <label for="salary">Monthly Salary:</label>
+            <input type="number" id="salary" placeholder="Enter monthly salary" required>
+
+            <button type="button" onclick="addEmployee()">Add Employee</button>
+        </form>
+    </div>
+    <script type="module">
+        import { addEmployee } from "./firebase-data.js";
+
+        function addEmployee() {
+            const name = document.getElementById("name").value;
+            const position = document.getElementById("position").value;
+            const salary = parseFloat(document.getElementById("salary").value);
+            const orgId = localStorage.getItem("orgId");
+
+            if (!orgId) {
+                alert("You need to log in first.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            addEmployee(orgId, `emp-${Date.now()}`, name, position, salary)
+                .then(() => {
+                    alert("Employee added successfully!");
+                    document.getElementById("addEmployeeForm").reset();
+                })
+                .catch(err => {
+                    console.error("Error adding employee:", err);
+                    alert("Failed to add employee. Please try again.");
+                });
+        }
+    </script>
+</body>
+</html>
