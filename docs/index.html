@@ -183,5 +183,35 @@
         <h2>Organization Login</h2>
         <a href="login.html">Click here to login</a>
     </div>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { addOrganization, addEmployee } from "./firebase-data.js";
+
+        // Example Buttons to Add Organization and Employee Data
+        document.body.innerHTML += `
+            <div class="container">
+                <button id="addOrgBtn">Add Organization</button>
+                <button id="addEmpBtn">Add Employee</button>
+            </div>
+        `;
+
+        document.getElementById("addOrgBtn").addEventListener("click", () => {
+            const orgId = "organization123";
+            const orgName = "ABC Corp";
+            const email = "abc@corp.com";
+            const password = "securepassword"; // Replace with hashed password
+            addOrganization(orgId, orgName, email, password);
+        });
+
+        document.getElementById("addEmpBtn").addEventListener("click", () => {
+            const orgId = "organization123";
+            const empId = "employee001";
+            const empName = "John Doe";
+            const empPosition = "Developer";
+            const empSalary = 5000;
+            addEmployee(orgId, empId, empName, empPosition, empSalary);
+        });
+    </script>
 </body>
 </html>
